@@ -145,8 +145,6 @@ namespace AccessingLBS.Controllers
                     var latitude = ConvertCoordinateToDecimal(xCoord);
                     var longitude = ConvertCoordinateToDecimal(yCoord);
 
-                    // Now you can use latitude and longitude for mapping
-                    // ...
 
                     return Ok(new { Latitude = latitude, Longitude = longitude });
                 }
@@ -163,7 +161,7 @@ namespace AccessingLBS.Controllers
 
         private double ConvertCoordinateToDecimal(string coord)
         {
-            // Assuming coord format is like "S22.984182" or "W43.359089"
+            
             var direction = coord[0];
             var value = double.Parse(coord.Substring(1));
             if (direction == 'S' || direction == 'W')
