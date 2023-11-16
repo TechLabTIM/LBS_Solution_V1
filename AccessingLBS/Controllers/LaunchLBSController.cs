@@ -14,29 +14,7 @@ namespace AccessingLBS.Controllers
         [HttpGet]
         public async Task<IActionResult> MakeSimpleRequest()
         {
-            string url = "http://10.221.31.191:2000/le";  // Replace with your actual URL
-
-            // Construct XML request using the image's information
-            //var xmlRequest = new StringBuilder();
-            //xmlRequest.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-            //xmlRequest.AppendLine("<!DOCTYPE svc_init SYSTEM \"MLP_SVC_INIT_320.DTD\">");
-            //xmlRequest.AppendLine("<svc_init ver=\"3.2.0\">");
-            //xmlRequest.AppendLine("    <hdr ver=\"3.2.0\">");
-            //xmlRequest.AppendLine("        <client>");
-            //xmlRequest.AppendLine("            <id>user</id>");
-            //xmlRequest.AppendLine("            <pwd>pass</pwd>");
-            //xmlRequest.AppendLine("        </client>");
-            //xmlRequest.AppendLine("    </hdr>");
-            //xmlRequest.AppendLine("    <slir ver=\"3.2.0\" res_type=\"SYNC\">");
-            //xmlRequest.AppendLine("        <msids>");
-            //xmlRequest.AppendLine("            <msid>5521912345678</msid>");
-            //xmlRequest.AppendLine("        </msids>");
-            //xmlRequest.AppendLine("        <eqop>");
-            //xmlRequest.AppendLine("            <hor_acc>100</hor_acc>");
-            //xmlRequest.AppendLine("        </eqop>");
-            //xmlRequest.AppendLine("        <loc_type type=\"CURRENT\"/>");
-            //xmlRequest.AppendLine("    </slir>");
-            //xmlRequest.AppendLine("</svc_init>");
+            string url = "http://10.221.31.191:2000/le"; 
 
             StringBuilder xmlRequest = new StringBuilder();
 
