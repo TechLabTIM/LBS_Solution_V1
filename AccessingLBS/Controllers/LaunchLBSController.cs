@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+
 namespace AccessingLBS.Controllers
 {
     [Route("api/[controller]")]
@@ -102,7 +104,7 @@ namespace AccessingLBS.Controllers
         }
 
         [HttpGet("le")]
-        public async Task<IActionResult> MakeSimpleRequestTeste()
+        public async Task<IActionResult> MakeSimpleRequestTeste(string msisdn)
         {
             string url = "http://10.221.31.191:2000/le";
 
@@ -118,27 +120,57 @@ namespace AccessingLBS.Controllers
             xmlRequest.AppendLine("        </client>");
             xmlRequest.AppendLine("    </hdr>");
             xmlRequest.AppendLine("    <eme_lir ver=\"3.2.0\">");
-            xmlRequest.AppendLine("        <msid>5511983137373</msid>");
+            xmlRequest.AppendLine($"        <msid>{msisdn}</msid>");
             xmlRequest.AppendLine("        <loc_type type=\"CURRENT\" />");
             xmlRequest.AppendLine("    </eme_lir>");
             xmlRequest.AppendLine("</svc_init>");
 
             var responseXml = await SendXmlRequest(url, xmlRequest.ToString());
 
-            // Handle the response
             if (responseXml != null)
             {
                 Console.WriteLine("Received response:");
                 Console.WriteLine(responseXml);
-                // Here you can add code to parse and handle the XML response
 
-                return Ok(responseXml);
+                // Parse the XML
+                var xDoc = XDocument.Parse(responseXml);
+                var ns = xDoc.Root.GetDefaultNamespace();
+                var coord = xDoc.Descendants(ns + "coord").FirstOrDefault();
+                if (coord != null)
+                {
+                    string xCoord = coord.Element(ns + "X").Value;
+                    string yCoord = coord.Element(ns + "Y").Value;
+
+                    // Convert Coordinates to Decimal
+                    var latitude = ConvertCoordinateToDecimal(xCoord);
+                    var longitude = ConvertCoordinateToDecimal(yCoord);
+
+                    // Now you can use latitude and longitude for mapping
+                    // ...
+
+                    return Ok(new { Latitude = latitude, Longitude = longitude });
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Coordinates not found in response");
+                }
             }
             else
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
 
+        private double ConvertCoordinateToDecimal(string coord)
+        {
+            // Assuming coord format is like "S22.984182" or "W43.359089"
+            var direction = coord[0];
+            var value = double.Parse(coord.Substring(1));
+            if (direction == 'S' || direction == 'W')
+            {
+                value *= -1;
+            }
+            return value;
         }
 
         private async Task<string> SendXmlRequest(string url, string xmlRequest)
