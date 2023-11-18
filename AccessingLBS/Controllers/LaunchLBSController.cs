@@ -4,6 +4,7 @@ using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace AccessingLBS.Controllers
 {
@@ -93,8 +94,8 @@ namespace AccessingLBS.Controllers
             xmlRequest.AppendLine("<svc_init ver=\"3.2.0\">");
             xmlRequest.AppendLine("    <hdr ver=\"3.2.0\">");
             xmlRequest.AppendLine("        <client>");
-            xmlRequest.AppendLine("            <id>5</id>");
-            xmlRequest.AppendLine("            <pwd>Lab@1234</pwd>");
+            xmlRequest.AppendLine("            <id>3</id>");
+            xmlRequest.AppendLine("            <pwd>DevLoc@123</pwd>");
             xmlRequest.AppendLine("        </client>");
             xmlRequest.AppendLine("    </hdr>");
             xmlRequest.AppendLine("    <eme_lir ver=\"3.2.0\">");
@@ -102,6 +103,9 @@ namespace AccessingLBS.Controllers
             xmlRequest.AppendLine("        <loc_type type=\"CURRENT\" />");
             xmlRequest.AppendLine("    </eme_lir>");
             xmlRequest.AppendLine("</svc_init>");
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             var responseXml = await SendXmlRequest(url, xmlRequest.ToString());
 
@@ -113,18 +117,28 @@ namespace AccessingLBS.Controllers
                 // Parse the XML
                 var xDoc = XDocument.Parse(responseXml);
                 var ns = xDoc.Root.GetDefaultNamespace();
-                var coord = xDoc.Descendants(ns + "coord").FirstOrDefault();
-                if (coord != null)
+                var circularArea = xDoc.Descendants(ns + "CircularArea").FirstOrDefault();
+                if (circularArea != null)
                 {
+                    var coord = circularArea.Element(ns + "coord");
                     string xCoord = coord.Element(ns + "X").Value;
                     string yCoord = coord.Element(ns + "Y").Value;
+
+                    var radius = circularArea.Element(ns + "radius").Value;
+                    var distanceUnit = circularArea.Element(ns + "distanceUnit").Value;
 
                     // Convert Coordinates to Decimal
                     var latitude = ConvertCoordinateToDecimal(xCoord);
                     var longitude = ConvertCoordinateToDecimal(yCoord);
+                    var radiusValue = double.Parse(radius);
 
+                    // Now you have latitude, longitude, and radius for mapping
+                    // ...
+                    stopwatch.Stop();
+                    TimeSpan requestTime = stopwatch.Elapsed;
+                    double requestTimeInSeconds = requestTime.TotalMilliseconds / 1000;
 
-                    return Ok(new { Latitude = latitude, Longitude = longitude });
+                    return Ok(new { Latitude = latitude, Longitude = longitude, Radius = radiusValue, DistanceUnit = distanceUnit, RequestTime = requestTimeInSeconds });
                 }
                 else
                 {
