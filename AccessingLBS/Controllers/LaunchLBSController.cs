@@ -90,19 +90,39 @@ namespace AccessingLBS.Controllers
 
             StringBuilder xmlRequest = new StringBuilder();
 
+            //xmlRequest.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+            //xmlRequest.AppendLine("<!DOCTYPE svc_init SYSTEM \"MLP_SVC_INIT_320.DTD\">");
+            //xmlRequest.AppendLine("<svc_init ver=\"3.2.0\">");
+            //xmlRequest.AppendLine("    <hdr ver=\"3.2.0\">");
+            //xmlRequest.AppendLine("        <client>");
+            //xmlRequest.AppendLine("            <id>3</id>");
+            //xmlRequest.AppendLine("            <pwd>DevLoc@123</pwd>");
+            //xmlRequest.AppendLine("        </client>");
+            //xmlRequest.AppendLine("    </hdr>");
+            //xmlRequest.AppendLine("    <eme_lir ver=\"3.2.0\">");
+            //xmlRequest.AppendLine($"        <msid>{msisdn}</msid>");
+            //xmlRequest.AppendLine("        <loc_type type=\"CURRENT\" />");
+            //xmlRequest.AppendLine("    </eme_lir>");
+            //xmlRequest.AppendLine("</svc_init>");
+
             xmlRequest.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
             xmlRequest.AppendLine("<!DOCTYPE svc_init SYSTEM \"MLP_SVC_INIT_320.DTD\">");
             xmlRequest.AppendLine("<svc_init ver=\"3.2.0\">");
-            xmlRequest.AppendLine("    <hdr ver=\"3.2.0\">");
-            xmlRequest.AppendLine("        <client>");
-            xmlRequest.AppendLine("            <id>3</id>");
-            xmlRequest.AppendLine("            <pwd>DevLoc@123</pwd>");
-            xmlRequest.AppendLine("        </client>");
-            xmlRequest.AppendLine("    </hdr>");
-            xmlRequest.AppendLine("    <eme_lir ver=\"3.2.0\">");
-            xmlRequest.AppendLine($"        <msid>{msisdn}</msid>");
-            xmlRequest.AppendLine("        <loc_type type=\"CURRENT\" />");
-            xmlRequest.AppendLine("    </eme_lir>");
+            xmlRequest.AppendLine("   <hdr ver=\"3.2.0\">");
+            xmlRequest.AppendLine("       <client>");
+            xmlRequest.AppendLine("         <id>3</id>");
+            xmlRequest.AppendLine("         <pwd>DevLoc@123</pwd>");
+            xmlRequest.AppendLine("       </client>");
+            xmlRequest.AppendLine("   </hdr>");
+            xmlRequest.AppendLine("   <slir ver=\"3.2.0\" res_type=\"SYNC\">");
+            xmlRequest.AppendLine("       <msids>");
+            xmlRequest.AppendLine($"          <msid>{msisdn}</msid>");
+            xmlRequest.AppendLine("       </msids>");
+            xmlRequest.AppendLine("       <eqop>");
+            xmlRequest.AppendLine("           <hor_acc>60</hor_acc>");
+            xmlRequest.AppendLine("       </eqop>");
+            xmlRequest.AppendLine("       <loc_type type=\"CURRENT\"/>");
+            xmlRequest.AppendLine("   </slir>");
             xmlRequest.AppendLine("</svc_init>");
 
             Stopwatch stopwatch = new Stopwatch();
