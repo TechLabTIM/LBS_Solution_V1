@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Diagnostics;
+using AccessingLBS.DTO;
 
 namespace AccessingLBS.Controllers
 {
@@ -117,7 +118,9 @@ namespace AccessingLBS.Controllers
                 // Parse the XML
                 var xDoc = XDocument.Parse(responseXml);
                 var ns = xDoc.Root.GetDefaultNamespace();
+
                 var circularArea = xDoc.Descendants(ns + "CircularArea").FirstOrDefault();
+                var circularArcArea = xDoc.Descendants(ns + "CircularArcArea").FirstOrDefault();
                 if (circularArea != null)
                 {
                     var coord = circularArea.Element(ns + "coord");
@@ -139,10 +142,36 @@ namespace AccessingLBS.Controllers
                     double requestTimeInSeconds = requestTime.TotalMilliseconds / 1000;
 
                     return Ok(new { Latitude = latitude, Longitude = longitude, Radius = radiusValue, DistanceUnit = distanceUnit, RequestTime = requestTimeInSeconds });
+                } else if(circularArcArea != null)
+                {
+                    var coord = circularArcArea.Element(ns + "coord");
+                    var latitude = ConvertCoordinateToDecimal(coord.Element(ns + "X").Value);
+                    var longitude = ConvertCoordinateToDecimal(coord.Element(ns + "Y").Value);
+                    var innerRadius = double.Parse(circularArcArea.Element(ns + "inRadius").Value);
+                    var outerRadius = double.Parse(circularArcArea.Element(ns + "outRadius").Value);
+                    var startAngle = double.Parse(circularArcArea.Element(ns + "startAngle").Value);
+                    var stopAngle = double.Parse(circularArcArea.Element(ns + "stopAngle").Value);
+                    stopwatch.Stop();
+                    TimeSpan requestTime = stopwatch.Elapsed;
+                    double requestTimeInSeconds = requestTime.TotalMilliseconds / 1000;
+                    var circularArcAreaDto = new CircularArcAreaDto
+                    {
+                        Latitude = latitude,
+                        Longitude = longitude,
+                        InnerRadius = innerRadius,
+                        OuterRadius = outerRadius,
+                        StartAngle = startAngle,
+                        StopAngle = stopAngle,
+                        RequestedTime = requestTimeInSeconds
+                    };
+                    return Ok(circularArcAreaDto);
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Coordinates not found in response");
+                    stopwatch.Stop();
+                    TimeSpan requestTime = stopwatch.Elapsed;
+                    double requestTimeInSeconds = requestTime.TotalMilliseconds / 1000;
+                    return Ok(new { RespostaXML = responseXml, TempoResposta = requestTimeInSeconds });
                 }
             }
             else
