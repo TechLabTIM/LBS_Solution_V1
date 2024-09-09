@@ -31,3 +31,36 @@ C:\TIMBrasil\Projetos\Plataforma - LBS\AccessingLBS\AccessingLBS\obj\Debug\net7.
 C:\TIMBrasil\Projetos\Plataforma - LBS\AccessingLBS\AccessingLBS\obj\Debug\net7.0\AccessingLBS.pdb
 C:\TIMBrasil\Projetos\Plataforma - LBS\AccessingLBS\AccessingLBS\obj\Debug\net7.0\AccessingLBS.genruntimeconfig.cache
 C:\TIMBrasil\Projetos\Plataforma - LBS\AccessingLBS\AccessingLBS\obj\Debug\net7.0\ref\AccessingLBS.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\appsettings.Development.json
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\appsettings.json
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\AccessingLBS.exe
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\AccessingLBS.deps.json
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\AccessingLBS.runtimeconfig.json
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\AccessingLBS.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\AccessingLBS.pdb
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.csproj.AssemblyReference.cache
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.GeneratedMSBuildEditorConfig.editorconfig
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.AssemblyInfoInputs.cache
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.AssemblyInfo.cs
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.csproj.CoreCompileInputs.cache
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.MvcApplicationPartsAssemblyInfo.cs
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.MvcApplicationPartsAssemblyInfo.cache
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets\msbuild.AccessingLBS.Microsoft.AspNetCore.StaticWebAssets.props
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets\msbuild.build.AccessingLBS.props
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.AccessingLBS.props
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.AccessingLBS.props
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.pack.json
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.build.json
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.development.json
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\scopedcss\bundle\AccessingLBS.styles.css
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.csproj.CopyComplete
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\refint\AccessingLBS.dll
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.pdb
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.genruntimeconfig.cache
+C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\ref\AccessingLBS.dll

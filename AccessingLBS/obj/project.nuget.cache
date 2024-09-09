@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RXhM5k22wcLHu1UVdGKAabSNeJIfVLdsTBPPYjYsGoGjMeDnCXmDQEQKyTIK4Oz1fRqbCgmUH/NX+fewrswu4A==",
+  "dgSpecHash": "fUV3Uo+IG+mHq2PfsFa4jg/5e4rU9CrEw5qe1SkiIkOWNt65ltf5ZnFbrzFJ/LKVpnBrwz5bHpWIYzmCvkvfHQ==",
   "success": true,
-  "projectFilePath": "C:\\TIMBrasil\\Projetos\\Plataforma - LBS\\AccessingLBS\\AccessingLBS\\AccessingLBS.csproj",
+  "projectFilePath": "C:\\projetos\\LBS_Solution_V1\\AccessingLBS\\AccessingLBS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\#TIMADMIN#\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.10\\microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",
     "C:\\Users\\#TIMADMIN#\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

@@ -9,5 +9,6 @@
         public double StartAngle { get; set; }
         public double StopAngle { get; set; }
         public double RequestedTime  { get; set; }
+        public string Type { get; set; }
     }
 }

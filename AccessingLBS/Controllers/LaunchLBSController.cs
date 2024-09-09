@@ -83,27 +83,112 @@ namespace AccessingLBS.Controllers
             }
         }
 
+        [HttpGet("lelist")]
+        public async Task<IActionResult> MakeSimpleRequestTeste([FromQuery] List<string> msisdns)
+        {
+            string url = "http://10.221.31.191:2000/le";
+            var results = new List<object>();
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            foreach (var msisdn in msisdns)
+            {
+                StringBuilder xmlRequest = new StringBuilder();
+
+                xmlRequest.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+                xmlRequest.AppendLine("<!DOCTYPE svc_init SYSTEM \"MLP_SVC_INIT_320.DTD\">");
+                xmlRequest.AppendLine("<svc_init ver=\"3.2.0\">");
+                xmlRequest.AppendLine("   <hdr ver=\"3.2.0\">");
+                xmlRequest.AppendLine("       <client>");
+                xmlRequest.AppendLine("         <id>3</id>");
+                xmlRequest.AppendLine("         <pwd>DevLoc@123</pwd>");
+                xmlRequest.AppendLine("       </client>");
+                xmlRequest.AppendLine("   </hdr>");
+                xmlRequest.AppendLine("   <slir ver=\"3.2.0\" res_type=\"SYNC\">");
+                xmlRequest.AppendLine("       <msids>");
+                xmlRequest.AppendLine($"          <msid>{msisdn}</msid>");
+                xmlRequest.AppendLine("       </msids>");
+                xmlRequest.AppendLine("       <eqop>");
+                xmlRequest.AppendLine("           <hor_acc>100</hor_acc>");
+                xmlRequest.AppendLine("       </eqop>");
+                xmlRequest.AppendLine("       <loc_type type=\"CURRENT\"/>");
+                xmlRequest.AppendLine("   </slir>");
+                xmlRequest.AppendLine("</svc_init>");
+
+                var responseXml = await SendXmlRequest(url, xmlRequest.ToString());
+
+                if (responseXml != null)
+                {
+                    Console.WriteLine("Received response:");
+                    Console.WriteLine(responseXml);
+
+                    var xDoc = XDocument.Parse(responseXml);
+                    var ns = xDoc.Root.GetDefaultNamespace();
+
+                    var circularArea = xDoc.Descendants(ns + "CircularArea").FirstOrDefault();
+                    var circularArcArea = xDoc.Descendants(ns + "CircularArcArea").FirstOrDefault();
+                    if (circularArea != null)
+                    {
+                        var coord = circularArea.Element(ns + "coord");
+                        string xCoord = coord.Element(ns + "X").Value;
+                        string yCoord = coord.Element(ns + "Y").Value;
+
+                        var radius = circularArea.Element(ns + "radius").Value;
+                        var distanceUnit = circularArea.Element(ns + "distanceUnit").Value;
+
+                        var latitude = ConvertCoordinateToDecimal(xCoord);
+                        var longitude = ConvertCoordinateToDecimal(yCoord);
+                        var radiusValue = double.Parse(radius);
+
+                        results.Add(new { Latitude = latitude, Longitude = longitude, Radius = radiusValue, DistanceUnit = distanceUnit, Type = "CircularArea" });
+                    }
+                    else if (circularArcArea != null)
+                    {
+                        var coord = circularArcArea.Element(ns + "coord");
+                        var latitude = ConvertCoordinateToDecimal(coord.Element(ns + "X").Value);
+                        var longitude = ConvertCoordinateToDecimal(coord.Element(ns + "Y").Value);
+                        var innerRadius = double.Parse(circularArcArea.Element(ns + "inRadius").Value);
+                        var outerRadius = double.Parse(circularArcArea.Element(ns + "outRadius").Value);
+                        var startAngle = double.Parse(circularArcArea.Element(ns + "startAngle").Value);
+                        var stopAngle = double.Parse(circularArcArea.Element(ns + "stopAngle").Value);
+
+                        results.Add(new CircularArcAreaDto
+                        {
+                            Latitude = latitude,
+                            Longitude = longitude,
+                            InnerRadius = innerRadius,
+                            OuterRadius = outerRadius,
+                            StartAngle = startAngle,
+                            StopAngle = stopAngle,
+                            Type = "CircularArcArea"
+                        });
+                    }
+                    else
+                    {
+                        results.Add(new { RespostaXML = responseXml });
+                    }
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+            }
+
+            stopwatch.Stop();
+            TimeSpan requestTime = stopwatch.Elapsed;
+            double requestTimeInSeconds = requestTime.TotalMilliseconds / 1000;
+
+            return Ok(new { Results = results, TotalRequestTime = requestTimeInSeconds });
+        }
+
+
         [HttpGet("le")]
         public async Task<IActionResult> MakeSimpleRequestTeste(string msisdn)
         {
             string url = "http://10.221.31.191:2000/le";
 
             StringBuilder xmlRequest = new StringBuilder();
-
-            //xmlRequest.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-            //xmlRequest.AppendLine("<!DOCTYPE svc_init SYSTEM \"MLP_SVC_INIT_320.DTD\">");
-            //xmlRequest.AppendLine("<svc_init ver=\"3.2.0\">");
-            //xmlRequest.AppendLine("    <hdr ver=\"3.2.0\">");
-            //xmlRequest.AppendLine("        <client>");
-            //xmlRequest.AppendLine("            <id>3</id>");
-            //xmlRequest.AppendLine("            <pwd>DevLoc@123</pwd>");
-            //xmlRequest.AppendLine("        </client>");
-            //xmlRequest.AppendLine("    </hdr>");
-            //xmlRequest.AppendLine("    <eme_lir ver=\"3.2.0\">");
-            //xmlRequest.AppendLine($"        <msid>{msisdn}</msid>");
-            //xmlRequest.AppendLine("        <loc_type type=\"CURRENT\" />");
-            //xmlRequest.AppendLine("    </eme_lir>");
-            //xmlRequest.AppendLine("</svc_init>");
 
             xmlRequest.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
             xmlRequest.AppendLine("<!DOCTYPE svc_init SYSTEM \"MLP_SVC_INIT_320.DTD\">");
@@ -119,7 +204,7 @@ namespace AccessingLBS.Controllers
             xmlRequest.AppendLine($"          <msid>{msisdn}</msid>");
             xmlRequest.AppendLine("       </msids>");
             xmlRequest.AppendLine("       <eqop>");
-            xmlRequest.AppendLine("           <hor_acc>60</hor_acc>");
+            xmlRequest.AppendLine("           <hor_acc>100</hor_acc>");
             xmlRequest.AppendLine("       </eqop>");
             xmlRequest.AppendLine("       <loc_type type=\"CURRENT\"/>");
             xmlRequest.AppendLine("   </slir>");
@@ -161,7 +246,7 @@ namespace AccessingLBS.Controllers
                     TimeSpan requestTime = stopwatch.Elapsed;
                     double requestTimeInSeconds = requestTime.TotalMilliseconds / 1000;
 
-                    return Ok(new { Latitude = latitude, Longitude = longitude, Radius = radiusValue, DistanceUnit = distanceUnit, RequestTime = requestTimeInSeconds });
+                    return Ok(new { Latitude = latitude, Longitude = longitude, Radius = radiusValue, DistanceUnit = distanceUnit, RequestTime = requestTimeInSeconds, Type = "CircularArea" });
                 } else if(circularArcArea != null)
                 {
                     var coord = circularArcArea.Element(ns + "coord");
@@ -182,7 +267,8 @@ namespace AccessingLBS.Controllers
                         OuterRadius = outerRadius,
                         StartAngle = startAngle,
                         StopAngle = stopAngle,
-                        RequestedTime = requestTimeInSeconds
+                        RequestedTime = requestTimeInSeconds,
+                        Type = "CircularArcArea"
                     };
                     return Ok(circularArcAreaDto);
                 }

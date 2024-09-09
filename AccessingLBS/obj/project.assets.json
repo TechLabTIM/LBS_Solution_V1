@@ -475,11 +475,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TIMBrasil\\Projetos\\Plataforma - LBS\\AccessingLBS\\AccessingLBS\\AccessingLBS.csproj",
+      "projectUniqueName": "C:\\projetos\\LBS_Solution_V1\\AccessingLBS\\AccessingLBS.csproj",
       "projectName": "AccessingLBS",
-      "projectPath": "C:\\TIMBrasil\\Projetos\\Plataforma - LBS\\AccessingLBS\\AccessingLBS\\AccessingLBS.csproj",
+      "projectPath": "C:\\projetos\\LBS_Solution_V1\\AccessingLBS\\AccessingLBS.csproj",
       "packagesPath": "C:\\Users\\#TIMADMIN#\\.nuget\\packages\\",
-      "outputPath": "C:\\TIMBrasil\\Projetos\\Plataforma - LBS\\AccessingLBS\\AccessingLBS\\obj\\",
+      "outputPath": "C:\\projetos\\LBS_Solution_V1\\AccessingLBS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -495,6 +495,7 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -541,7 +542,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }
