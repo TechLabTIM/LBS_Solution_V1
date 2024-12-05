@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "F1OTo0tq94AiEve4XC+87sMaw7WiKy4PVzb8kviTYes=",
+  "Hash": "gkjViLaAOQMXKyXgdrTU1zzTzdLiqqQ4xz8jAExNwxY=",
   "Source": "AccessingLBS",
   "BasePath": "_content/AccessingLBS",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

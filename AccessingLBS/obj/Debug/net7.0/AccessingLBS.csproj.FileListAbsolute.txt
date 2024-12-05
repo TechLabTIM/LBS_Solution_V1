@@ -58,9 +58,14 @@ C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.pack.j
 C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.build.json
 C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.development.json
 C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\scopedcss\bundle\AccessingLBS.styles.css
-C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.csproj.CopyComplete
 C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.dll
 C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\refint\AccessingLBS.dll
 C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.pdb
 C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.genruntimeconfig.cache
 C:\projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\ref\AccessingLBS.dll
+C:\Projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\AccessingLBS.staticwebassets.endpoints.json
+C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\AccessingLBS.sourcelink.json
+C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.build.endpoints.json
+C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets\msbuild.AccessingLBS.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.upToDateCheck.txt
+C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\Accessin.A7D9561D.Up2Date

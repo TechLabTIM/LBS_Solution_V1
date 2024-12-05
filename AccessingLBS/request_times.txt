@@ -1,0 +1,4 @@
+Request Times (in seconds):
+2.166716
+0.9349829
+Average Request Time: 1.55084945
