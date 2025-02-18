@@ -1,0 +1,3 @@
+Request Times Per MSISDN (in seconds):
+MSISDN 5521960114015: Average Time = 1.5897796899999999
+MSISDN 5511930000348: Average Time = 1.93459374

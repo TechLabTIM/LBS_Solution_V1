@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AccessingLBS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db5d07bd337755b89049ae98539a6b00adbbda68")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad8a4c90c493a49ae8374bb8e38229854118182f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AccessingLBS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AccessingLBS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

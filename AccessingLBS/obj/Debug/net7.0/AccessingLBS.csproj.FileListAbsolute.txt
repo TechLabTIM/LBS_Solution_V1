@@ -69,3 +69,4 @@ C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.build.
 C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets\msbuild.AccessingLBS.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\staticwebassets.upToDateCheck.txt
 C:\Projetos\LBS_Solution_V1\AccessingLBS\obj\Debug\net7.0\Accessin.A7D9561D.Up2Date
+C:\Projetos\LBS_Solution_V1\AccessingLBS\bin\Debug\net7.0\Swashbuckle.AspNetCore.Annotations.dll
