@@ -29,6 +29,11 @@ builder.Services.AddCors(options =>
         })
 );
 
+builder.Services.AddHttpClient("LBSClient", client =>
+{
+    client.Timeout = TimeSpan.FromMinutes(3);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

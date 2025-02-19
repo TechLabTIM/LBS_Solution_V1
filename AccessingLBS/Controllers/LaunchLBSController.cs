@@ -13,6 +13,11 @@ namespace AccessingLBS.Controllers
     [ApiController]
     public class LaunchLBSController : ControllerBase
     {
+        private readonly HttpClient _httpClient;    
+        public LaunchLBSController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClient = httpClientFactory.CreateClient("LBSClient");
+        }
         public class Perfil
         {
             public int Id { get; set; }
@@ -793,54 +798,90 @@ namespace AccessingLBS.Controllers
             return value;
         }
 
+        //private async Task<string> SendXmlRequest(string url, string xmlRequest)
+        //{
+        //    using (var client = new HttpClient())
+        //    {
+        //        var content = new StringContent(xmlRequest, Encoding.UTF8, "text/xml");
+        //        HttpResponseMessage response;
+        //        int maxAttempts = 3;
+        //        int attempt = 0;
+
+        //        while (attempt < maxAttempts)
+        //        {
+        //            attempt++;
+        //            try
+        //            {
+        //                response = await client.PostAsync(url, content);
+        //                if (response.IsSuccessStatusCode)
+        //                {
+        //                    Console.WriteLine($"Success on attempt {attempt}");
+        //                    return await response.Content.ReadAsStringAsync();
+        //                }
+        //                else
+        //                {
+        //                    Console.WriteLine($"Attempt {attempt}: Failed to send request with status code: {response.StatusCode}");
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Console.WriteLine($"Attempt {attempt}: Exception occurred - {ex.Message}");
+        //                // Optionally, handle specific exceptions differently
+        //            }
+
+        //            if (attempt < maxAttempts)
+        //            {
+        //                await Task.Delay(1000 * attempt); // Increasing delay before retrying
+        //            }
+        //        }
+
+        //        throw new HttpRequestException($"Failed to receive a successful response after {maxAttempts} attempts.");
+        //    }
+        //}public class LaunchLBSController : ControllerBase
+
+
         private async Task<string> SendXmlRequest(string url, string xmlRequest)
         {
-            using (var client = new HttpClient())
+            var content = new StringContent(xmlRequest, Encoding.UTF8, "text/xml");
+
+            HttpResponseMessage response;
+            int maxAttempts = 3;
+            int attempt = 0;
+
+            while (attempt < maxAttempts)
             {
-                var content = new StringContent(xmlRequest, Encoding.UTF8, "text/xml");
-                HttpResponseMessage response;
-                int maxAttempts = 3;
-                int attempt = 0;
-
-                while (attempt < maxAttempts)
+                attempt++;
+                try
                 {
-                    attempt++;
-                    try
-                    {
-                        response = await client.PostAsync(url, content);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            Console.WriteLine($"Success on attempt {attempt}");
-                            return await response.Content.ReadAsStringAsync();
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Attempt {attempt}: Failed to send request with status code: {response.StatusCode}");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Attempt {attempt}: Exception occurred - {ex.Message}");
-                        // Optionally, handle specific exceptions differently
-                    }
+                    response = await _httpClient.PostAsync(url, content); // **Use injected HttpClient**
 
-                    if (attempt < maxAttempts)
+                    if (response.IsSuccessStatusCode)
                     {
-                        await Task.Delay(1000 * attempt); // Increasing delay before retrying
+                        Console.WriteLine($"Success on attempt {attempt}");
+                        return await response.Content.ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Attempt {attempt}: Failed with status code: {response.StatusCode}");
                     }
                 }
+                catch (TaskCanceledException)
+                {
+                    Console.WriteLine($"Attempt {attempt}: Timeout reached.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Attempt {attempt}: Exception - {ex.Message}");
+                }
 
-                throw new HttpRequestException($"Failed to receive a successful response after {maxAttempts} attempts.");
+                if (attempt < maxAttempts)
+                {
+                    await Task.Delay(1000 * attempt);
+                }
             }
+
+            throw new HttpRequestException($"Failed after {maxAttempts} attempts.");
         }
-
-
-
-
-
-
-
-
-
     }
+
 }
